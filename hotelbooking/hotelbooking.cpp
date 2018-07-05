@@ -39,7 +39,7 @@ bool min_hotels_faster() {
 void min_hotels_calc() {
 	bool visited[MAXV][MAX_DIST + 1];
 	for(int i=1; i<=n_nodes; i++) {
-		memset(visited[i], 0, sizeof(visited[i])*sizeof(bool));
+		memset(visited[i], 0, sizeof(visited[i]));
 	}
 	priority_queue <iii, viii, greater<iii > > frontier;
 	frontier.push(make_tuple(0, 0, start));
