@@ -1,0 +1,2 @@
+start < in1
+break 18 if dp[money][garment]==0
