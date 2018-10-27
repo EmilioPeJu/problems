@@ -27,10 +27,9 @@ def main():
         i = 0
         while i < len(citing) and (i + 1) <= citing[i]:
             i += 1
-        if i == len(citing):
-            h_index[key] = i
-        else:
-            h_index[key] = i
+
+        h_index[key] = i
+
     authors = list(author_citing.keys())
 
     class ToCompare(object):
