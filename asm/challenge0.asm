@@ -2,7 +2,7 @@
 global _start
 section .data
 newline: db 10
-buffer: times 100 db 0
+
 section .text
 _start:
 mov rax, rsp
@@ -36,19 +36,8 @@ ja loop2
 mov rsi, rsp
 add rsi, 16
 mov rsi, [rsi]
-mov rdi, buffer
-jmp cond3
-loop3:
-mov r11, [rsi]
-mov [rdi], r11b
-inc rsi
-inc rdi
-cond3:
-cmp [rsi], byte 0
-ja loop3
 
 mov rdi, 1
-mov rsi, buffer
 mov rdx, r9
 mov rax, 1
 syscall
