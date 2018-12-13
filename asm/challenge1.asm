@@ -1,10 +1,10 @@
-; we are using libc to simplify getting parameters
-; naaah, not really, I'll do it later without it
-global main
+; sum numbers from argv (variable length)
+global _start
 section .text
-main:
-mov r8, rdi ; argc
-mov r9, rsi ; argv
+_start:
+mov r8, [rsp] ; argc
+mov r9, rsp  
+add r9, 8 ; argv
 xor r10, r10 ; aux for storing max
 sub r8, 1
 add r9, 8 ; skip command
