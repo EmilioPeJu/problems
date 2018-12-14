@@ -1,4 +1,4 @@
-all: challenge1
+all: challenge1 challenge2
 
 %: %.asm
 	yasm -f elf64 $< -o $@.o
