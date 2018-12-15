@@ -1,10 +1,10 @@
-all: challenge1 challenge2
+all: challenge1.out challenge2.out challenge3.out
 
-%: %.asm
+%.out: %.asm
 	yasm -f elf64 $< -o $@.o
-	ld $@.o -o $@.out
-	chmod +x $@.out
+	ld $@.o -o $@
+	chmod +x $@
 
 clean:
-	rm *.out
+	rm *.out *.o
 
