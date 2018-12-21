@@ -1,4 +1,4 @@
-all: challenge1.out challenge2.out challenge3.out
+all: reverse0.out max1.out rpn2.out tree3.out
 
 %.out: %.asm
 	yasm -f elf64 $< -o $@.o
