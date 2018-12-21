@@ -3,6 +3,7 @@ global _start
 opplus equ '+'
 opminus equ '-'
 opby equ '*'
+opdiv equ '/'
 
 section .text
 _start:
@@ -11,7 +12,8 @@ mov r12, [rbp]
 dec r12
 mov r13, rsp
 add r13, 16
-
+; r13 pointing to current argument
+; r12 number of arguments left
 jmp cond2
 loop2:
 mov rdi, [r13]
@@ -21,6 +23,8 @@ cmp byte [rdi], opminus
 je do_sub
 cmp byte [rdi], opby
 je do_by
+cmp byte [rdi], opdiv
+je do_div
 call str_to_int
 push rax
 
@@ -31,15 +35,15 @@ cond2:
 cmp r12, 0
 ja loop2
 
+pop rdi
 call int_to_str
 mov rax, 1
 mov rdi, 1
 mov rsi, rsp
 mov rdx, r11
 syscall
-; get result as return code until
-; I complete some functions
-pop rdi
+; exit
+xor rsi, rsi
 mov rax, 60
 syscall
 
@@ -65,10 +69,16 @@ imul rdi, rsi
 push rdi
 jmp init2
 
-; functions
-; not finished
+do_div:
+xor rdx, rdx
+pop rdi
+pop rax
+div rdi
+push rax
+jmp init2
+
 int_to_str:
-pop r12
+pop r12 ; preserve return address
 xor rdx, rdx
 xor r11, r11
 mov rcx, 10
