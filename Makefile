@@ -1,24 +1,33 @@
 CC=g++
-FLAGS=-std=c++17 -ggdb -O0 -pipe -Wall
-LIBS=-lm -lcrypt
+CFLAGS=-std=c++17 -ggdb -O0 -pipe -Wall
+CLIBS=-lm -lcrypt
 
-SRC=$(wildcard *.cpp)
-OBJ=$(SRC:.cpp=.o)
-BIN=$(SRC:.cpp=)
+CSRC=$(wildcard *.cpp)
+COBJ=$(CSRC:.cpp=.o)
+CBIN=$(CSRC:.cpp=.out)
+
+RUST=rustc
+RSRC=$(wildcard *.rs)
+RBIN=$(RSRC:.rs=.out)
 
 .DEFAULT_GOAL := all
 
-all: $(OBJ) $(BIN)
+all:: $(COBJ) $(CBIN)
 
-%: %.o
-	$(CC) $(LIBS) -o $@ $^
+all:: $(RBIN)
+
+%.out:: %.o
+	$(CC) $(CLIBS) -o $@ $^
+
+%.out:: %.rs
+	$(RUST) -o $@ $^
 
 %.o: %.cpp
-	$(CC) $(FLAGS) -c $<
+	$(CC) $(CFLAGS) -c $<
 
 clean:
-	rm -rf $(OBJ) $(BIN)
+	rm -rf $(COBJ) $(CBIN) $(RBIN)
 
 test:
-	checkinputs
+	./checkinputs.sh
 
