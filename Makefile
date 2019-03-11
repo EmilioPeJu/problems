@@ -7,6 +7,7 @@ COBJ=$(CSRC:.cpp=.o)
 CBIN=$(CSRC:.cpp=.out)
 
 RUST=rustc
+RFLAGS=-g
 RSRC=$(wildcard *.rs)
 RBIN=$(RSRC:.rs=.out)
 
@@ -20,7 +21,7 @@ all:: $(RBIN)
 	$(CC) $(CLIBS) -o $@ $^
 
 %.out:: %.rs
-	$(RUST) -o $@ $^
+	$(RUST) $(RFLAGS) -o $@ $^
 
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $<
