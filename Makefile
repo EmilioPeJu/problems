@@ -26,8 +26,11 @@ all:: $(RBIN)
 %.o: %.cpp
 	$(CC) $(CFLAGS) -c $<
 
-clean:
+clean: clean-tests
 	rm -rf $(COBJ) $(CBIN) $(RBIN)
+
+clean-tests:
+	rm -rf in?? out?? current??
 
 test:
 	./checkinputs.sh
