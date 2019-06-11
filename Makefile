@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-std=c++17 -ggdb -O0 -pipe -Wall
+CFLAGS=-std=c++17 -ggdb -O0 -pipe -Wall -Wconversion -Werror -Wtype-limits
 CLIBS=-lm -lcrypt
 
 CSRC=$(wildcard *.cpp)
