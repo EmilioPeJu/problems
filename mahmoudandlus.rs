@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 struct Scan {
     buffer: std::collections::VecDeque<String>,
 }
@@ -25,21 +23,12 @@ impl Scan {
 
 fn _main() {
     let mut scan = Scan::new();
-    let n: usize = scan.next();
-    let mut names: HashMap<String, usize> = HashMap::new();
-    for _ in 0..n {
-        let name: String = scan.next();
-        let v = names
-            .entry(name.clone())
-            .and_modify(|x| {
-                *x += 1;
-            })
-            .or_insert(0);
-        if *v == 0 {
-            println!("OK");
-        } else {
-            println!("{}{}", name, v);
-        }
+    let input1: String = scan.next();
+    let input2: String = scan.next();
+    if input1 == input2 {
+        println!("-1");
+    } else {
+        println!("{}", input1.len().max(input2.len()));
     }
 }
 

@@ -1,5 +1,3 @@
-use std::collections::HashMap;
-
 struct Scan {
     buffer: std::collections::VecDeque<String>,
 }
@@ -21,25 +19,31 @@ impl Scan {
             self.buffer = line.split_whitespace().map(String::from).collect();
         }
     }
+
+    fn next_n<T: std::str::FromStr>(&mut self, n: usize) -> Vec<T> {
+        (0..n).map(|_| self.next::<T>()).collect()
+    }
 }
 
 fn _main() {
     let mut scan = Scan::new();
-    let n: usize = scan.next();
-    let mut names: HashMap<String, usize> = HashMap::new();
-    for _ in 0..n {
-        let name: String = scan.next();
-        let v = names
-            .entry(name.clone())
-            .and_modify(|x| {
-                *x += 1;
-            })
-            .or_insert(0);
-        if *v == 0 {
-            println!("OK");
-        } else {
-            println!("{}{}", name, v);
+    let q: usize = scan.next();
+    for _ in 0..q {
+        let n: usize = scan.next();
+        let mut arr: Vec<usize> = scan.next_n(n);
+        // if n == 1 {
+        //     println!("1");
+        //     continue;
+        // }
+        arr.sort();
+        let mut needmore = false;
+        for i in 1..arr.len() {
+            if arr[i] == arr[i - 1] + 1 {
+                needmore = true;
+                break;
+            }
         }
+        println!("{}", if needmore { "2" } else { "1" });
     }
 }
 
