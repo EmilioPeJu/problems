@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-std=c++17 -ggdb -O0 -pipe -Wall -Wconversion -Werror -Wtype-limits
+CFLAGS=-std=c++17 -ggdb -O0 -pipe -Wall -Werror -Wtype-limits
 CLIBS=-lm -lcrypt
 
 CSRC=$(wildcard *.cpp)
@@ -35,3 +35,5 @@ clean-tests:
 test:
 	./checkinputs.sh
 
+gdb:
+	./rungdb.sh
