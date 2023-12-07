@@ -26,36 +26,18 @@ class Hand(object):
                     max_count = counts[c]
 
         if n_js == 5:
-            return 7
+            return [1, 0, 0, 0, 0] + [Hand.OPTIONS.index(c) for c in hand]
+
 
         counts[max_c] += n_js
         count_counts = [0] * 6
         for count in counts.values():
             count_counts[count] += 1
 
-        if count_counts[5] == 1:
-            return 7
-        elif count_counts[4] == 1:
-            return 6
-        elif count_counts[3] == 1:
-            if count_counts[2] == 1:
-                return 5
-            else:
-                return 4
-        elif count_counts[2] == 2:
-            return 3
-        elif count_counts[2] == 1:
-            return 2
-        else:
-            return 1
-
+        return list(reversed(count_counts))+ [Hand.OPTIONS.index(c) for c in hand]
 
     def __lt__(self, other):
-        key1 = [self.score(self.hand)] + \
-               [self.OPTIONS.index(c) for c in self.hand]
-        key2 = [self.score(other.hand)] + \
-               [self.OPTIONS.index(c) for c in other.hand]
-        return key1 < key2
+        return self.score(self.hand) < self.score(other.hand)
 
 
 def read_input():
