@@ -1,13 +1,15 @@
 struct Scan {
-    buffer: std::collections::VecDeque<String>
+    buffer: std::collections::VecDeque<String>,
 }
 
 impl Scan {
     fn new() -> Scan {
-        Scan { buffer: std::collections::VecDeque::new() }
+        Scan {
+            buffer: std::collections::VecDeque::new(),
+        }
     }
 
-    fn next<T: std::str::FromStr>(&mut self)-> T {
+    fn next<T: std::str::FromStr>(&mut self) -> T {
         loop {
             if let Some(token) = self.buffer.pop_front() {
                 break token.parse::<T>().ok().unwrap();
@@ -17,7 +19,6 @@ impl Scan {
             self.buffer = line.split_whitespace().map(String::from).collect();
         }
     }
-
 }
 
 fn main() {
